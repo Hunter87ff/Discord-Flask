@@ -1,0 +1,34 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+      
+permissions:
+  contents: read
+  
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.9  # Change this to your desired Python version
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+      working-directory: /  # Change this to your project's root directory
+
+    - name: Deploy
+      run: |
+        # Add any deployment commands here
+        # For example, to run your Python application:
+        python example/test_app.py
