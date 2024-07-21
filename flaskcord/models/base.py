@@ -19,7 +19,7 @@ class DiscordModelsBase(metaclass=DiscordModelsMeta):
 
     @abstractmethod
     def __init__(self, payload):
-        self._payload = payload
+        self._payload:dict = payload
 
     @staticmethod
     def _request(*args, **kwargs):

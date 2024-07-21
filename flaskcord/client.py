@@ -212,9 +212,11 @@ class Session(_http.DiscordOAuth2HttpClient):
     
     @staticmethod
     def get_guild(guild_id:int) -> models.Guild:
-        ROUTE = f"/guilds/{guild_id}"
-        payload = current_app.discord.bot_request(ROUTE)
-        return models.Guild(payload)
+        try:
+            ROUTE = f"/guilds/{guild_id}"
+            payload = current_app.discord.bot_request(ROUTE)
+            return models.Guild(payload)
+        except: return None
 
 
     @staticmethod

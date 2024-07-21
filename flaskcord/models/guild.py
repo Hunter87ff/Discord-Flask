@@ -25,28 +25,20 @@ class Guild(DiscordModelsBase):
         self.is_owner = self._payload.get("owner")
         self.permissions = self.__get_permissions(self._payload.get("permissions"))
         self._roles:dict= self._add_roles()
-        self._members:dict = self._add_members()
+        self._members:dict = {}
         self._channels:dict = self._add_channels()
         self._owner_id:int = int(self._payload.get("owner_id"))
-        # print(json.dumps(self._members.values()[0], indent=4))
 
     def _add_channels(self):
-        # if self._channels:return self._channels
         fetched_channels = self._bot_request(f"/guilds/{self.id}/channels")
-        # print("Channel:",json.dumps(list(fetched_channels)[0], indent=4))
         return {channel['id']:Channel(channel, self) for channel in fetched_channels}
     
     def _add_members(self):
-        # if self._members:return self._members
         fetched_members = self._bot_request(f"/guilds/{self.id}/members?limit=1000")
-        # print("Member:", json.dumps(list(fetched_members)[0], indent=4))
-        return {member["user"]["id"]: Member(member, self) for member in fetched_members}
+        self._members = {member["user"]["id"]: Member(member, self) for member in fetched_members}
 
     def _add_roles(self):
-        # if self._roles:return self._roles
-        # fetched_roles:dict = self._bot_request(f"/guilds/{self.id}/roles")
         fetched_roles = self._payload.get("roles")
-        # print("Role:",json.dumps(list(fetched_roles)[0], indent=4))
         return {role["id"] : Role(role, self) for role in fetched_roles}
 
     @staticmethod
@@ -71,8 +63,9 @@ class Guild(DiscordModelsBase):
     def get_channel(self, channel_id:int)->Channel:
         return self._channels.get(channel_id)
     
-    def get_member(self, user_id:int)->types.Member:
-        return self._members.get(user_id)
+    def get_member(self, user_id:int)->Member:
+        fetched_member = self._bot_request(f"/guilds/{self.id}/members/{user_id}")
+        return Member(fetched_member, self)
     
     def get_role(self, role_id:int)->Role:
         return self._roles.get(role_id)    
@@ -190,3 +183,11 @@ class CGuild(DiscordModelsBase):
                 pass
 
         return guilds
+    
+    def get_member(self, user_id:int)->Member:
+        try:
+            fetched_member = self._bot_request(f"/guilds/{self.id}/members/{user_id}")
+            print(fetched_member)
+            return Member(fetched_member, self)
+        except:
+            return None
