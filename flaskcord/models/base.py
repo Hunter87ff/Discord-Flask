@@ -1,6 +1,6 @@
 from flask import current_app
 from abc import ABCMeta, abstractmethod
-
+import typing
 
 class DiscordModelsMeta(ABCMeta):
 
@@ -30,9 +30,9 @@ class DiscordModelsBase(metaclass=DiscordModelsMeta):
         return current_app.discord.request(*args, **kwargs)
 
     @staticmethod
-    def _bot_request(*args, **kwargs):
+    def _bot_request(route: str, method="GET", **kwargs) -> typing.Union[dict, str]:
         """A shorthand to :py:func:flaskcord.bot_request`."""
-        return current_app.discord.bot_request(*args, **kwargs)
+        return current_app.discord.bot_request(route, method, **kwargs)
 
     @classmethod
     def fetch_from_api(cls):

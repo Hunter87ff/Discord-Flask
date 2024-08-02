@@ -1,4 +1,4 @@
-DISCORD_API_BASE_URL = "https://discordapp.com/api"
+DISCORD_API_BASE_URL = "https://discord.com/api/v10"
 
 DISCORD_AUTHORIZATION_BASE_URL = DISCORD_API_BASE_URL + "/oauth2/authorize"
 DISCORD_TOKEN_URL = DISCORD_API_BASE_URL + "/oauth2/token"
@@ -10,7 +10,7 @@ DISCORD_OAUTH_ALL_SCOPES = [
 ]
 
 DISCORD_OAUTH_DEFAULT_SCOPES = [
-    "identify", "email", "guilds", "guilds.join"
+    "identify", "email", "guilds"
 ]
 
 

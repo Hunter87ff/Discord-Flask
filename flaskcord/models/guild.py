@@ -15,7 +15,7 @@ from typing import (
 
 class Guild(DiscordModelsBase):
     MANY = True
-    ROUTE = "/users/@me/guilds"
+    ROUTE = "/guilds/{guild_id}"
 
     def __init__(self, payload:dict):
         super().__init__(payload)
@@ -64,8 +64,11 @@ class Guild(DiscordModelsBase):
         return self._channels.get(channel_id)
     
     def get_member(self, user_id:int)->Member:
+        if self._members and user_id in self._members:return self._members[user_id]
         fetched_member = self._bot_request(f"/guilds/{self.id}/members/{user_id}")
-        return Member(fetched_member, self)
+        member_obj = Member(fetched_member, self)
+        if not self._members: self._members[member_obj.id] = member_obj
+        return member_obj
     
     def get_role(self, role_id:int)->Role:
         return self._roles.get(role_id)    
