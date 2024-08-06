@@ -6,8 +6,8 @@ import abc
 
 from . import configs
 from . import exceptions
-
-from flask import session, request
+from .models import Guild
+from flask import Flask, session, request
 from collections.abc import Mapping
 from requests_oauthlib import OAuth2Session
 
@@ -26,7 +26,7 @@ class DiscordOAuth2HttpClient(abc.ABC):
     ]
 
     def __init__(
-            self, app=None,
+            self, app:Flask=None,
             client_id=None, client_secret=None, redirect_uri=None,
             bot_token=None, users_cache=None, proxy=None, proxy_auth=None
     ):
@@ -37,11 +37,12 @@ class DiscordOAuth2HttpClient(abc.ABC):
         self.users_cache = users_cache
         self.proxy = proxy
         self.proxy_auth = proxy_auth
+        self._guilds: dict[int:Guild] = {}
 
         if app is not None:
             self.init_app(app)
 
-    def init_app(self, app):
+    def init_app(self, app:Flask):
         """A method to lazily initialize the application.
         Use this when you're using flask factory pattern to create your instances of your flask application.
 

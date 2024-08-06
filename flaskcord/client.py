@@ -1,5 +1,6 @@
 import jwt
 import typing
+from cachetools import cached, LFUCache
 from . import configs, _http, models, utils, exceptions, types
 from flask import request, session, redirect, current_app
 from oauthlib.common import add_params_to_uri, generate_token
@@ -45,7 +46,6 @@ class Session(_http.DiscordOAuth2HttpClient):
         Uses the default max limit for cache if ``DISCORD_USERS_CACHE_MAX_LIMIT`` isn't specified in app config.
 
     """
-
 
     @staticmethod
     def __save_state(state):
@@ -200,7 +200,7 @@ class Session(_http.DiscordOAuth2HttpClient):
             List of :py:class:`flaskcord.models.UserConnection` objects.
 
         """
-        user = models.User.get_from_cache()
+        user:models.User = models.User.get_from_cache()
         try:
             if user.connections is not None:
                 return user.connections
@@ -209,19 +209,21 @@ class Session(_http.DiscordOAuth2HttpClient):
 
         return models.UserConnection.fetch_from_api()
     
-    
-    @staticmethod
-    def get_guild(guild_id:int) -> models.Guild:
-        try:
-            ROUTE = f"/guilds/{guild_id}"
-            payload = current_app.discord.bot_request(ROUTE)
-            return models.Guild(payload)
-        except: return None
+    @cached(cache=LFUCache(maxsize=1024))
+    def get_guild(self, guild_id:int) -> models.Guild:
+        ROUTE = f"/guilds/{guild_id}"
+        if self._guilds.get(guild_id):
+            return self._guilds.get(guild_id)
+        payload = current_app.discord.bot_request(ROUTE)
+        guild = models.Guild(payload)
+        self._guilds[guild_id] = guild
+        return guild
+
 
 
     @staticmethod
     def fetch_guilds() -> list[models.CGuild]:
-        user = models.User.get_from_cache()
+        user:models.User = models.User.get_from_cache()
         try:
             if user.guilds is not None:
                 return user.guilds
