@@ -1,7 +1,6 @@
 """
 MIT License
 
-Copyright (c) 2019 thecosmos
 Copyright (c) 2024 hunter87ff
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
