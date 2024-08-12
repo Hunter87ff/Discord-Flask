@@ -18,6 +18,7 @@ requirements = [
     "oauthlib",
     "cachetools",
     "requests_oauthlib",
+    "typing-extensions"
 ]
 
 
