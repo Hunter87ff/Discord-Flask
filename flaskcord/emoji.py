@@ -1,4 +1,5 @@
-"""MIT License
+"""
+MIT License
 
 Copyright (c) 2024 hunter87ff
 
@@ -21,29 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 
 
+from . import configs
 
-from flask import current_app
-from ..role import Role
+class Emoji:
+    def init(self, payload:dict):
+        self.id = payload.get("id")
+        self.name = payload.get("name")
+        self.roles = payload.get("roles")
+        self.user = payload.get("user")
+        self.require_colons = payload.get("require_colons")
+        self.managed = payload.get("managed")
+        self.animated = payload.get("animated")
+        self.available = payload.get("available")
 
-class Member:
-    def __init__(self, _payload:dict, guild) -> None:
-        
-        self.guild = guild
-        self.name = _payload["user"]["global_name"]
-        self.id = int(_payload.get("user").get("id"))
-        self.discriminator = _payload.get("discriminator")
-        self.avatar_hash = _payload["user"]["avatar"]
-        self.roles = _payload.get("roles")
-        self.joined_at = _payload.get("joined_at")
-        self.user = _payload.get("user")
-        self.deaf = _payload.get("deaf")
-        self.mute = _payload.get("mute")
-        self.nick = _payload.get("nick")
-
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
-    
-    def add_role(self, role:Role):
-        return current_app.discord.bot_request(f"/guilds/{self.guild.id}/members/{self.id}/roles/{role.id}", method="PUT")
 
+    def url(self):
+        return f"{configs.DISCORD_EMOJI_URL}{self.id}"

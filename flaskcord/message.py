@@ -1,5 +1,7 @@
-"""MIT License
+"""
+MIT License
 
+Copyright (c) 2019 thecosmos
 Copyright (c) 2024 hunter87ff
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,32 +20,33 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE."""
+SOFTWARE.
+"""
 
-
-
-from flask import current_app
-from ..role import Role
-
-class Member:
-    def __init__(self, _payload:dict, guild) -> None:
-        
-        self.guild = guild
-        self.name = _payload["user"]["global_name"]
-        self.id = int(_payload.get("user").get("id"))
-        self.discriminator = _payload.get("discriminator")
-        self.avatar_hash = _payload["user"]["avatar"]
-        self.roles = _payload.get("roles")
-        self.joined_at = _payload.get("joined_at")
-        self.user = _payload.get("user")
-        self.deaf = _payload.get("deaf")
-        self.mute = _payload.get("mute")
-        self.nick = _payload.get("nick")
+class Message:
+    def __init__(self, payload:dict) -> None:
+        self.channel_id = payload.get("channel_id")
+        self.author = payload.get("author")
+        self.content = payload.get("content")
+        self.id = payload.get("id")
+        self.mentions = payload.get("mentions")
+        self.embeds = payload.get("embeds")
+        self.attachments = payload.get("attachments")
+        self.webhook_id = payload.get("webhook_id")
+        self.pinned = payload.get("pinned")
+        self.mention_roles = payload.get("mention_roles")
+        self.mention_everyone = payload.get("mention_everyone")
+        self.reactios = payload.get("reactios")
+        self.payload:dict = payload
 
     def __str__(self) -> str:
-        return self.name
+        return self.content
     
-    
-    def add_role(self, role:Role):
-        return current_app.discord.bot_request(f"/guilds/{self.guild.id}/members/{self.id}/roles/{role.id}", method="PUT")
+    def reply(self, *args) -> None:
+        pass
 
+    def delete(self) -> None:
+        pass
+
+    def edit(self, *args) -> None:
+        pass

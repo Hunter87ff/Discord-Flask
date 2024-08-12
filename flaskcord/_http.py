@@ -1,9 +1,13 @@
+# This code is mostly copied from flask_discord
+# Author: https://github.com/weibeu
+
 import cachetools
 import requests
 import typing
 import json
 import abc
-
+from .message import Message
+from .embed import Embed
 from . import configs
 from . import exceptions
 from .models import Guild
@@ -207,3 +211,14 @@ class DiscordOAuth2HttpClient(abc.ABC):
         """
         headers = {"Authorization": f"Bot {self.__bot_token}"}
         return self.request(route, method=method, oauth=False, headers=headers, **kwargs)
+    
+
+    def send_message(self, channel_id: int, content:str=None, embeds:list[Embed]=None) -> Message:
+        """Send a message to specified channel."""
+        data = {
+            "content": content,
+            "embeds": [embed.to_dict() for embed in embeds if embeds]
+        }
+        r = self.bot_request(method='POST', route=f'/channels/{channel_id}/messages', json=data)
+        return Message(r)
+

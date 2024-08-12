@@ -1,6 +1,6 @@
 class Integration(object):
 
-    def __init__(self, payload):
+    def __init__(self, payload:dict):
         self._payload = payload
         self.id = int(self._payload.get("id", 0))
         self.name = self._payload.get("name")
