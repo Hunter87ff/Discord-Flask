@@ -21,7 +21,7 @@ from flaskcord import Session, requires_authorization
 app = Flask(__name__)
 app.secret_key = b"%\xe0'\x01\xdeH\x8e\x85m|\xb3\xffCN\xc9g"
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"    # !! Only in development environment.
-app.config["DISCORD_CLIENT_ID"] = 490732332240863233
+app.config["DISCORD_CLIENT_ID"] = os.getenv("CLIENT_ID")
 app.config["DISCORD_CLIENT_SECRET"] = os.getenv("DISCORD_CLIENT_SECRET")
 app.config["DISCORD_BOT_TOKEN"] = os.getenv("DISCORD_BOT_TOKEN")
 app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback"
@@ -44,10 +44,11 @@ def redirect_unauthorized(e):
     return redirect(url_for("login"))
 
 	
-@app.route("/me/")
+@app.route("/dashboard/")
 @requires_authorization
 def me():
     user = discord.fetch_user()
+    guilds = discord.fetch_guilds()
     return f"""
     <html>
         <head>
@@ -55,12 +56,13 @@ def me():
         </head>
         <body>
             <img src='{user.avatar_url}' />
+            <h2>Guilds: {len(guilds)}</h2>
         </body>
     </html>"""
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=8080)
 ```
 
 For an example to the working application, check [`test_app.py`](example/test_app.py)
