@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, redirect, url_for
-from flaskcord import Session, requires_authorization
+from discord_flask import Session, requires_authorization
 
 
 app = Flask(__name__)
