@@ -25,6 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install Discord-Flask
       working-directory: .  # Change this to your project's root directory
 
     - name: Deploy
