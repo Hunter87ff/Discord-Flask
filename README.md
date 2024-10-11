@@ -1,13 +1,13 @@
-# FlaskCord
-[![Latest Release](https://img.shields.io/github/v/release/hunter87ff/FlaskCord?include_prereleases&label=Latest%20Release&logo=github&sort=semver&style=for-the-badge&logoColor=white)](https://github.com/hunter87ff/FlaskCord/releases)
+# Discord-Flask
+[![Latest Release](https://img.shields.io/github/v/release/hunter87ff/Discord-Flask?include_prereleases&label=Latest%20Release&logo=github&sort=semver&style=for-the-badge&logoColor=white)](https://github.com/hunter87ff/Discord-Flask/releases)
 
-A flask-discord fork. flaskcord is a feature rich extension for Flask. with discord.py like functionalities
+A flask-discord fork. Discord-Flask is a feature rich extension for Flask. with discord.py like functionalities
 
 
 ### Installation
 To install current development version you can use following command:
 ```sh
-pip install git+https://github.com/hunter87ff/FlaskCord.git
+pip install git+https://github.com/hunter87ff/Discord-Flask.git
 ```
 
 
@@ -16,7 +16,7 @@ pip install git+https://github.com/hunter87ff/FlaskCord.git
 import os
 
 from flask import Flask, redirect, url_for
-from flaskcord import Session, requires_authorization
+from discord_flask import Session, requires_authorization
 
 app = Flask(__name__)
 app.secret_key = b"%\xe0'\x01\xdeH\x8e\x85m|\xb3\xffCN\xc9g"
@@ -76,7 +76,7 @@ For an example to the working application, check [`test_app.py`](example/test_ap
 
 
 <!-- ### Documentation
-Head over to [documentation](https://FlaskCord.readthedocs.io/en/latest/) for full API reference.  -->
+Head over to [documentation](https://discordflask.readthedocs.io/en/latest/) for full API reference.  -->
 
 
 
