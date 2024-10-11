@@ -25,7 +25,7 @@ requirements = [
 setup(
     name='Discord-Flask',
     version=__get_version(),
-    url='https://github.com/hunter87ff/FlaskCord',
+    url='https://github.com/hunter87ff/Discord-Flask',
     license='MIT',
     author='hunter87ff',
     author_email='souravyt87@gmail.com',
