@@ -5,7 +5,12 @@ A flask-discord fork. Discord-Flask is a feature rich extension for Flask. with 
 
 
 ### Installation
-To install current development version you can use following command:
+> Install Released Version
+```sh
+pip install Discord-Flask
+```
+
+> To install current development version you can use following command:
 ```sh
 pip install git+https://github.com/hunter87ff/Discord-Flask.git
 ```
