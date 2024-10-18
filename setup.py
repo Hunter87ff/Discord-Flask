@@ -28,7 +28,7 @@ setup(
     url='https://github.com/hunter87ff/Discord-Flask',
     license='MIT',
     author='hunter87ff',
-    author_email='souravyt87@gmail.com',
+    author_email='hunter87.dev@gmail.com',
     description='A feature rich discord extension for Flask.',
     long_description=__doc__,
     packages=find_packages(),
