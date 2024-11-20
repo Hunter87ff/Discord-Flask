@@ -7,7 +7,7 @@ from discord_flask.exceptions import Unauthorized
 
 app = Flask(__name__)
 app.guilds = {} #for cache purpose
-app.secret_key = b"SECRET_KEY"
+app.secret_key = config.SECRET_KEY
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"    # !! Only in development environment.
 
 discord = Session(
