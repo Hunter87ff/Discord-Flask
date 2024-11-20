@@ -22,4 +22,4 @@ __all__ = [
 ]
 
 __author__ = "hunter87ff"
-__version__ = "1.0.2"
+__version__ = "1.0.3"
