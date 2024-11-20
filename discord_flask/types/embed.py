@@ -26,14 +26,20 @@ from typing import List, Tuple
 
 class Embed:
     """Class representing an embed object."""
-    def __init__(self, title:str=None, description:str=None, color:int=None, fields:List[Tuple[str, str]]=None, footer:Tuple[str, str]=None):
+    def __init__(self, 
+                 title:str=None, 
+                 description:str=None, 
+                 color:int=None, 
+                 fields:List[Tuple[str, str]]=None, 
+                 footer:Tuple[str, str]=None
+    ):
         self.title:str = title
         self.description:str = description
         self.color:int = color
         self.fields:List = fields
         self.footer:Tuple[str, str] = footer
-        self.image:str = None
-        self.thumbnail:str = None
+        self.image:str
+        self.thumbnail:str
 
     def __repr__(self):
         return f"<Embed title={self.title} description={self.description} color={self.color} fields={self.fields}>"
