@@ -20,7 +20,7 @@ requirements = [
     "requests_oauthlib",
     "typing-extensions"
 ]
-def get_long_description():
+def __get_long_description():
     with open("README.md", "r") as readme_file:
         return readme_file.read()
 
@@ -31,8 +31,7 @@ setup(
     license='MIT',
     author='hunter87ff',
     author_email='hunter87.dev@gmail.com',
-    description=get_long_description(),
-    long_description=__doc__,
+    long_description=__get_long_description(),
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
