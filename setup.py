@@ -32,7 +32,6 @@ setup(
     author='hunter87ff',
     author_email='hunter87.dev@gmail.com',
     description=get_long_description(),
-    description='A feature rich discord extension for Flask.',
     long_description=__doc__,
     packages=find_packages(),
     zip_safe=False,
