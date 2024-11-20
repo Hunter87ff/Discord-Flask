@@ -74,5 +74,5 @@ def guild_dashboard(guild_id):
         return redirect("/dashboard")
     return render_template("guild.html",guild=guild, config=config) #Change configurations accordingly
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+# if __name__ == "__main__":
+# 	app.run(host="0.0.0.0", port=5000)
