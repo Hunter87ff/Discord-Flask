@@ -20,7 +20,9 @@ requirements = [
     "requests_oauthlib",
     "typing-extensions"
 ]
-
+def get_long_description():
+    with open("README.md", "r") as readme_file:
+        return readme_file.read()
 
 setup(
     name='Discord-Flask',
@@ -28,8 +30,8 @@ setup(
     url='https://github.com/hunter87ff/Discord-Flask',
     license='MIT',
     author='hunter87ff',
-    author_email='souravyt87@gmail.com',
-    description='A feature rich discord extension for Flask.',
+    author_email='hunter87.dev@gmail.com',
+    description=get_long_description(),
     long_description=__doc__,
     packages=find_packages(),
     zip_safe=False,

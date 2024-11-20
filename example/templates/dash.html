@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>{{ user.username }}</h1>
+        <img src="{{ avatar }}" alt="user avatar">
+        <ul>
+            {% for guild in guilds %}
+                <a href="/dashboard/{{guild.id}}">
+                    <li>{{ guild.name }}</li>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

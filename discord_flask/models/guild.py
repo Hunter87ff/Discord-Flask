@@ -125,7 +125,7 @@ class Guild(DiscordModelsBase):
     
 
 class CGuild(DiscordModelsBase):
-    """Class representing discord Guild the user is part of.
+    """CGuild Class representing discord Guild the user is part of.
 
     Operations
     ----------
