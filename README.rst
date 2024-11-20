@@ -103,7 +103,7 @@ Basic Example
      if __name__ == "__main__":
           app.run(host="0.0.0.0", port=5000)
 
-For an example to the working application, check `test_app.py <example/test_app.py>`_.
+For an example to the working application, check `test_app.py <https://github.com/Hunter87ff/Discord-Flask/blob/main/example/test_app.py>`_.
 
 .. note::
      Documentation is currently not available.
