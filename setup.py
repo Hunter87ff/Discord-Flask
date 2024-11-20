@@ -21,7 +21,7 @@ requirements = [
     "typing-extensions"
 ]
 def __get_long_description():
-    with open("README.md", "r") as readme_file:
+    with open("README.rst", "r") as readme_file:
         return readme_file.read()
 
 setup(
